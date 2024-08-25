@@ -60,9 +60,10 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-Route::get('/basket', [\App\Http\Controllers\Api\BasketController::class, 'index']);
+Route::get('/basket', [\App\Http\Controllers\Api\BasketController::class, 'getFullBasket']);
+Route::post('/basket', [\App\Http\Controllers\Api\BasketController::class, 'createFullBasket']);
 Route::post('/basket/delete', [\App\Http\Controllers\Api\BasketController::class, 'deleteFullBasket']);
-Route::post('/basket/products', [\App\Http\Controllers\Api\BasketController::class, 'addToBasket']);
-Route::post('/basket/product/delete', [\App\Http\Controllers\Api\BasketController::class, 'deleteSingleProduct']);
+Route::post('/basket/product/add', [\App\Http\Controllers\Api\BasketController::class, 'addToBasket']);
+Route::post('/basket/product/remove', [\App\Http\Controllers\Api\BasketController::class, 'removeFromBasket']);
 
 
