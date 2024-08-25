@@ -48,9 +48,7 @@ class ProductsController extends Controller
         $slug = $request->query('slug');
         $category = Categories::query()
             ->where('slug', $slug)
-            ->with(['products' => function ($query) {
-                $query->with(['attributes', 'colors', 'sizes', 'images', 'children']);
-            }])
+            ->with('products')
             ->first();
 
         if ($category && $category->products->count() > 0) {

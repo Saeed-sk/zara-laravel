@@ -56,14 +56,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/favorites', [\App\Http\Controllers\Api\FavoriteController::class, 'index']);
     Route::post('/favorites', [\App\Http\Controllers\Api\FavoriteController::class, 'create']);
     Route::post('/favorites/delete', [\App\Http\Controllers\Api\FavoriteController::class, 'destroy']);
-
+    Route::post('/basket/product/add', [\App\Http\Controllers\Api\BasketController::class, 'addToBasket']);
+    Route::post('/basket/product/remove', [\App\Http\Controllers\Api\BasketController::class, 'removeFromBasket']);
 });
 
 
 Route::get('/basket', [\App\Http\Controllers\Api\BasketController::class, 'getFullBasket']);
 Route::post('/basket', [\App\Http\Controllers\Api\BasketController::class, 'createFullBasket']);
 Route::post('/basket/delete', [\App\Http\Controllers\Api\BasketController::class, 'deleteFullBasket']);
-Route::post('/basket/product/add', [\App\Http\Controllers\Api\BasketController::class, 'addToBasket']);
-Route::post('/basket/product/remove', [\App\Http\Controllers\Api\BasketController::class, 'removeFromBasket']);
+
 
 

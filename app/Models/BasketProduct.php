@@ -16,8 +16,7 @@ class BasketProduct extends Pivot
 {
     protected $table = 'basket_product';
     protected $fillable = ['basket_id', 'product_id', 'color_id', 'size_id', 'quantity'];
-    protected $guarded = 'id';
-
+    protected $with = ['color', 'size'];
     public function color(): BelongsTo
     {
         return $this->belongsTo(Colors::class, 'color_id');

@@ -24,12 +24,25 @@ class Basket extends Model
 {
     use HasFactory;
     protected $fillable = ['basket_id', 'product_id', 'color_id','user_id','total_price'];
+    protected $with =['products'];
+    protected $casts = [
+        'basket_id' => 'integer',
+        'product_id' => 'integer',
+        'color_id' => 'integer',
+        'user_id' => 'integer',
+        'total_price' => 'string',
+    ];
+
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Products::class, 'basket_product', 'basket_id', 'product_id')
-            ->withPivot('color_id', 'size_id', 'quantity', 'total_price')
-            ->withTimestamps();
+        return $this->belongsToMany(
+            Products::class,
+            'basket_product',
+            'basket_id',
+            'product_id'
+        )->using(BasketProduct::class)
+            ->withPivot('color_id', 'size_id', 'quantity');
     }
 
 

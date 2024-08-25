@@ -45,6 +45,7 @@ class Products extends Model
         'maintenance',
         'parent_id'
     ];
+    protected $with = ['images','colors','sizes','attributes','categories','children','parent'];
     public function sizes(): BelongsToMany
     {
         return $this->belongsToMany(Sizes::class, 'product_size', 'product_id', 'size_id');
@@ -80,10 +81,15 @@ class Products extends Model
         return $this->hasMany(Products::class, 'parent_id', 'id');
     }
 
-    public function basket(): BelongsToMany
+    public function baskets(): BelongsToMany
     {
-        return $this->belongsToMany(Basket::class, 'basket_product', 'basket_id', 'product_id')
-            ->withPivot('color_id', 'size_id', 'quantity', 'total_price')
-            ->withTimestamps();
+        return $this->belongsToMany(
+            Basket::class,
+            'basket_product',
+            'product_id',
+            'basket_id',
+        )->using(BasketProduct::class)
+        ->withPivot('color_id', 'size_id', 'quantity');
     }
+
 }

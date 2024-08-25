@@ -45,6 +45,7 @@ class User extends Authenticatable
         'password',
         'otp_expire_at'
     ];
+    protected $with = ['baskets', 'favorites'];
 
     /**
      * The attributes that should be hidden for serialization.

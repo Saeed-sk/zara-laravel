@@ -71,7 +71,9 @@ class FavoriteController extends Controller
     public function destroy(Request $request)
     {
         $favorite = Favorite::query()->where('users_id', $request->user()->id)->where('products_id', $request['product_id'])->first();
-        $favorite->delete();
+        if(!empty($favorite)){
+            $favorite->delete();
+        }
         return response()->json(['$favorite' => $favorite], 200);
     }
 }
