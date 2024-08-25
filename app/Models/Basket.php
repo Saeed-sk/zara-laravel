@@ -23,9 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Basket extends Model
 {
     use HasFactory;
-
-    protected $guarded = ['id'];
-    protected $fillable = ['basket_id', 'product_id', 'color_id'];
+    protected $fillable = ['basket_id', 'product_id', 'color_id','user_id','total_price'];
 
     public function products(): BelongsToMany
     {

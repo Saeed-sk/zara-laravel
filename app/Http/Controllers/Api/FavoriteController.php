@@ -13,20 +13,29 @@ class FavoriteController extends Controller
      */
     public function index()
     {
-        //
+        $favorites = Favorite::query()->where('user_id', auth()->user()->id)->get();
+        if (count($favorites) > 0) {
+            return response()->json(['$favorites' => $favorites], 200);
+        }
+        return response()->json(['error' => 'هیچ علاقه‌مندی‌ای برای شما وجود ندارد'], 404);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+        ]);
+
+        $favorite = new Favorite();
+        $favorite->users_id = $request->user()->id;
+        $favorite->products_id = $request['product_id'];
+        $favorite->save();
+        return response()->json(['$favorite' => $favorite], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
@@ -59,8 +68,10 @@ class FavoriteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(favorite $favorite)
+    public function destroy(Request $request)
     {
-        //
+        $favorite = Favorite::query()->where('users_id', $request->user()->id)->where('products_id', $request['product_id'])->first();
+        $favorite->delete();
+        return response()->json(['$favorite' => $favorite], 200);
     }
 }

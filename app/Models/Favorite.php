@@ -18,9 +18,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class Favorite extends Pivot
 {
     use HasFactory;
-
     protected $table = 'favorites';
     protected $guarded = 'id';
     protected $fillable = ['users_id', 'products_id'];
-
 }

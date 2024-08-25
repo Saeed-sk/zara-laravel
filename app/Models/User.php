@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * 
+ *
  *
  * @property mixed $password
  * @property-read \App\Models\Addresses|null $address
@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     public function favorites(): BelongsToMany
     {
-        return $this->belongsToMany(Favorite::class, 'favorites', 'users_id', 'products_id');
+        return $this->belongsToMany(Products::class, 'favorites', 'users_id', 'products_id');
     }
 
     public function baskets(): HasMany
