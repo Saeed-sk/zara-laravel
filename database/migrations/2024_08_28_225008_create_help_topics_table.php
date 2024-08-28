@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('helps', function (Blueprint $table) {
+        Schema::create('help_topics', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('body');
+            $table->string('slug')->unique();
+            $table->foreignId('help_id')->references('id')->on('helps')->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('helps');
+        Schema::dropIfExists('help_topics');
     }
 };
