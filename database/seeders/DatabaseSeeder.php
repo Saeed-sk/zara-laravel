@@ -6,16 +6,12 @@ use App\Models\attributes;
 use App\Models\Banners;
 use App\Models\Categories;
 use App\Models\Colors;
+use App\Models\Help;
+use App\Models\HelpsTopics;
 use App\Models\Images;
-use App\Models\ProductAttribute;
-use App\Models\ProductCategory;
-use App\Models\ProductColor;
 use App\Models\Products;
-use App\Models\ProductSize;
 use App\Models\Sizes;
 use App\Models\User;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Factories\BannersFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -49,9 +45,9 @@ class DatabaseSeeder extends Seeder
             }
             $products = Products::all();
             foreach ($products as $product) {
-                $randomColors = Colors::inRandomOrder()->take(3)->pluck('id')->toArray();
-                $randomAttrs = attributes::inRandomOrder()->take(3)->pluck('id')->toArray();
-                $randomSize = Colors::inRandomOrder()->take(3)->pluck('id')->toArray();
+                $randomColors = Colors::inRandomOrder()->take(5)->pluck('id')->toArray();
+                $randomAttrs = attributes::inRandomOrder()->take(5)->pluck('id')->toArray();
+                $randomSize = Colors::inRandomOrder()->take(5)->pluck('id')->toArray();
                 $product->colors()->attach($randomColors);
                 $product->sizes()->attach($randomSize);
                 $product->attributes()->attach($randomAttrs);
@@ -61,6 +57,10 @@ class DatabaseSeeder extends Seeder
             foreach ($ids as $id) {
                 Images::factory(5)->create(['product_id' => $id]);
             }
+
+            Help::factory(10)->create();
+            HelpsTopics::factory(100)->create();
+
         });
     }
 }

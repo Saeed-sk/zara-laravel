@@ -12,13 +12,13 @@ class BasketController extends Controller
 {
     public function getFullBasket(Request $request): JsonResponse
     {
-        $basket = Basket::query()->where('user_id', $request->user()->id)->where('payment_status', 'unpaid')->with('products')->first();
+        $basket = Basket::query()->where('user_id', auth()->user()->id)->where('payment_status', 'unpaid')->with('products')->first();
         return response()->json($basket, 200);
     }
 
-    public function createFullBasket(Request $request)
+    public function createFullBasket(Request $request): JsonResponse
     {
-        $basket = Basket::query()->where('user_id', 2)->where('payment_status', 'unpaid')->first();
+        $basket = Basket::query()->where('user_id', auth()->user()->id)->where('payment_status', 'unpaid')->first();
 
         if (empty($basket)) {
             $basket = new Basket();
@@ -37,9 +37,9 @@ class BasketController extends Controller
         return response()->json($basket, 200);
     }
 
-    public function deleteFullBasket(Request $request)
+    public function deleteFullBasket(Request $request):JsonResponse
     {
-        $basket = Basket::query()->where('user_id', 2)->where('payment_status', 'unpaid')->first();
+        $basket = Basket::query()->where('user_id',auth()->user()->id)->where('payment_status', 'unpaid')->first();
         if (empty($basket)) {
             return response()->json(['error' => 'سبد خرید یافت نشد'], 404);
         } else {
@@ -48,7 +48,7 @@ class BasketController extends Controller
         }
     }
 
-    public function addToBasket(Request $request)
+    public function addToBasket(Request $request):JsonResponse
     {
         $basket = Basket::query()->where('user_id', auth()->user()->id)->where('payment_status', 'unpaid')->first();
         $product = $request['product'];
@@ -68,7 +68,7 @@ class BasketController extends Controller
         return response()->json($basket, 200);
     }
 
-    public function removeFromBasket(Request $request)
+    public function removeFromBasket(Request $request): JsonResponse
     {
         $basket = Basket::query()->where('user_id', auth()->user()->id)->where('payment_status', 'unpaid')->first();
         $product = $request['product'];

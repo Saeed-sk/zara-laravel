@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Colors;
 use App\Models\Products;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SearchProductsController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         $products = Products::query()->inRandomOrder()->take(10)->get();
         return response()->json($products);
     }
 
-    public function search(Request $request)
+    public function search(Request $request): JsonResponse
     {
         $text = $request['query'];
 

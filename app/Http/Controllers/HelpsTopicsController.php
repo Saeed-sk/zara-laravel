@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Help;
+use App\Models\HelpsTopics;
 use Illuminate\Http\Request;
 
-class HelpController extends Controller
+class HelpsTopicsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class HelpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Help $help)
+    public function show(HelpsTopics $helpsTopics)
     {
         //
     }
@@ -42,7 +42,7 @@ class HelpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Help $help)
+    public function edit(HelpsTopics $helpsTopics)
     {
         //
     }
@@ -50,7 +50,7 @@ class HelpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Help $help)
+    public function update(Request $request, HelpsTopics $helpsTopics)
     {
         //
     }
@@ -58,7 +58,7 @@ class HelpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Help $help)
+    public function destroy(HelpsTopics $helpsTopics)
     {
         //
     }

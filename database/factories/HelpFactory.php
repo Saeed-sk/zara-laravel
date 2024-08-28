@@ -16,8 +16,9 @@ class HelpFactory extends Factory
      */
     public function definition(): array
     {
+        $faker = \Faker\Factory::create('fa_IR');
         return [
-            //
+            'title'=>$faker->text(5),
         ];
     }
 }

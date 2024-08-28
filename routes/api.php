@@ -51,6 +51,10 @@ Route::get('/product', [\App\Http\Controllers\Api\ProductsController::class, 'ge
 // search in products
 Route::get('/search/items', [\App\Http\Controllers\Api\SearchProductsController::class, 'index']);
 Route::get('/search/query', [\App\Http\Controllers\Api\SearchProductsController::class, 'search']);
+
+// help and contact
+Route::get('/help', [\App\Http\Controllers\Api\HelpController::class, 'index']);
+Route::get('/help/topic', [\App\Http\Controllers\Api\HelpController::class, 'getHelpTopic']);
 // authenticated actions favorites and baskets and payment
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/favorites', [\App\Http\Controllers\Api\FavoriteController::class, 'index']);

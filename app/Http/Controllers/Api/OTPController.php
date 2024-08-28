@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class OTPController extends Controller
 {
-    public function sendOtp(Request $request)
+    public function sendOtp(Request $request): JsonResponse
     {
         $user = User::query()->where('phone_number', $request->phone_number)->first();
         if ($user) {
@@ -22,7 +23,7 @@ class OTPController extends Controller
         return response()->json(['error' => 'User not found'], 404);
     }
 
-    public function verifyOtp(Request $request)
+    public function verifyOtp(Request $request): JsonResponse
     {
         $user = User::query()->where('phone_number', $request->phone_number)->first();
         if ($user && Hash::check($request->otp, $user->otp)) {

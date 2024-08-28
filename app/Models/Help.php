@@ -11,11 +11,10 @@ class Help extends Model
     use HasFactory;
 
     protected $table = 'helps';
-    protected $fillable = ['title'];
-    protected $with = ['topics'];
+    protected $fillable = ['id','title'];
 
     public function topics(): HasMany
     {
-        return $this->hasMany(HelpTopic::class, 'help_id', 'id');
+        return $this->hasMany(HelpsTopics::class, 'help_id', 'id');
     }
 }
